@@ -12,8 +12,8 @@ from tqdm import tqdm
 from clip_text_decoder.model import ImageCaptionInferenceModel
 
 FB_MEME_PATH = "/home/aggarwalp/meme_datasets/fb"
-
-
+HARMEME_MEME_PATH = "/home/aggarwalp/meme_datasets/harmeme"
+MAMI_MEME_PATH = "/home/aggarwalp/meme_datasets/mami"
 
 def extract_CLIPcaption(model, img_path):
     '''
@@ -31,7 +31,7 @@ def main():
     model = ImageCaptionInferenceModel.load('/home/aggarwalp/meme_datasets/pretrained-model-1.4.0.pt')
     device = "cuda" if torch.cuda.is_available() else "cpu"
     model.to(device)
-    memes_array = glob(os.path.join(FB_MEME_PATH,'img','*'))
+    memes_array = glob(os.path.join(MAMI_MEME_PATH,'img','*'))
     meme_caption_dataset = []
     #count = 0
     for meme in tqdm(memes_array):
@@ -44,7 +44,7 @@ def main():
         #print(meme_caption_dataset)
         #if count == 4:
          #   break
-    with codecs.open(os.path.join(os.path.dirname(FB_MEME_PATH),os.path.basename(FB_MEME_PATH)+"_clipCaption.json"), "w", 'utf-8') as final:
+    with codecs.open(os.path.join(os.path.dirname(MAMI_MEME_PATH),os.path.basename(MAMI_MEME_PATH)+"_clipCaption.json"), "w", 'utf-8') as final:
         json.dump(meme_caption_dataset, final)
         
 
